@@ -10,26 +10,26 @@ export const serverRoutes: ServerRoute[] = [
     path: 'signup',
     renderMode: RenderMode.Prerender
   },
-  // Dynamic routes with parameters - use App Shell instead of prerender
+  // Dynamic routes with parameters - use SSR instead of prerender
   {
     path: 'dashboard',
-    renderMode: RenderMode.AppShell
+    renderMode: RenderMode.SSR
   },
   {
     path: 'projects',
-    renderMode: RenderMode.AppShell
+    renderMode: RenderMode.SSR
   },
   {
     path: 'tasks',
-    renderMode: RenderMode.AppShell
+    renderMode: RenderMode.SSR
   },
   {
     path: 'tasks/:projectId',
-    renderMode: RenderMode.AppShell
+    renderMode: RenderMode.SSR
   },
   // Catch-all fallback
   {
     path: '**',
-    renderMode: RenderMode.AppShell
+    renderMode: RenderMode.SSR
   }
 ];
