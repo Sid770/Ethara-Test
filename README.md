@@ -1,17 +1,18 @@
-# 📌 Team Task Manager - Full Stack Application
+#  Team Task Manager - Full Stack Application
 
 **Developed by:** Siddharth Sharma
+
 
 A comprehensive full-stack web application for managing projects and tasks with role-based access control, JWT authentication, and real-time task tracking.
 
 ---
 
-## 📋 Assignment Overview
+##  Assignment Overview
 
 **Assignment:** Team Task Manager (Full-Stack)  
 **Objective:** Build a web app where users can create projects, assign tasks, and track progress with role-based access (Admin/Member).
 
-### 🚀 Key Requirements Met
+###  Key Requirements Met
 ✅ Authentication (Signup/Login with JWT)  
 ✅ Project & team management  
 ✅ Task creation, assignment & status tracking  
@@ -22,7 +23,7 @@ A comprehensive full-stack web application for managing projects and tasks with 
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 ### Backend
 - **Framework:** .NET 8 Web API
@@ -92,7 +93,7 @@ Ethara-Test/
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 - .NET 8 SDK installed
@@ -109,8 +110,8 @@ cd TeamTaskManagerApi
 dotnet run
 ```
 
-**Backend URL:** `http://localhost:5175`  
-**Swagger API Docs:** `http://localhost:5175/swagger/index.html`
+**Backend URL:** `https://ethara-backend-cwcqbkajg5dphpcy.centralindia-01.azurewebsites.net`  
+**Swagger API Docs:** `https://ethara-backend-cwcqbkajg5dphpcy.centralindia-01.azurewebsites.net/swagger/index.html`
 
 ### Step 2: Start the Frontend
 
@@ -125,11 +126,11 @@ npm install
 ng serve
 ```
 
-**Frontend URL:** `http://localhost:63651` (auto-assigned if 4200 in use)
+**Frontend URL:** `https://ethara-test.vercel.app/`
 
 ---
 
-## 📝 Demo Credentials
+##  Demo Credentials
 
 ### Admin Account
 - **Email:** `admin@teamtaskmanager.com`
@@ -205,7 +206,7 @@ Automatically seeded on first run:
 
 ---
 
-## 🔌 API Endpoints
+##  API Endpoints
 
 ### Authentication
 ```
@@ -239,7 +240,7 @@ GET    /api/dashboard               # Get dashboard statistics
 
 ---
 
-## 🎨 UI Features
+##  UI Features
 
 ### Responsive Design
 - Mobile-friendly Tailwind CSS styling
@@ -275,10 +276,18 @@ GET    /api/dashboard               # Get dashboard statistics
 
 ---
 
-## 🧪 Testing the Application
+##  Deployment
+
+### Live Deployment
+- **Frontend:** [https://ethara-test.vercel.app/](https://ethara-test.vercel.app/)
+- **Backend API & Swagger:** [https://ethara-backend-cwcqbkajg5dphpcy.centralindia-01.azurewebsites.net/swagger/index.html](https://ethara-backend-cwcqbkajg5dphpcy.centralindia-01.azurewebsites.net/swagger/index.html)
+
+---
+
+##  Testing the Application
 
 ### 1. Login
-1. Go to `http://localhost:63651/login`
+1. Go to `https://ethara-test.vercel.app/login`
 2. Enter admin credentials
 3. Click "Login"
 
@@ -290,6 +299,8 @@ GET    /api/dashboard               # Get dashboard statistics
 - Navigate to "Projects" section
 - View all 3 demo projects
 - Click "View Tasks" to see project-specific tasks in modal
+
+**Test on Deployed Application:** [https://ethara-test.vercel.app/projects](https://ethara-test.vercel.app/projects)
 
 ### 4. Manage Tasks
 - Go to "Tasks" section
@@ -304,34 +315,8 @@ GET    /api/dashboard               # Get dashboard statistics
 
 ---
 
-## 🐛 Troubleshooting
 
-### Backend won't start
-```bash
-# Check if port 5175 is in use
-netstat -ano | findstr :5175
-# Kill the process if needed
-taskkill /PID <PID> /F
-```
-
-### Frontend won't compile
-```bash
-# Clear node modules and reinstall
-rm -r node_modules
-npm install
-ng serve
-```
-
-### Database issues
-```bash
-# Delete the database file to reseed
-rm TeamTaskManagerApi/teamtaskmanager.db
-# Restart backend to recreate
-```
-
----
-
-## 📊 Database Schema
+##  Database Schema
 
 ### Users Table
 - Id (GUID)
@@ -367,7 +352,7 @@ rm TeamTaskManagerApi/teamtaskmanager.db
 
 ---
 
-## 🎯 Performance Optimizations
+##  Performance Optimizations
 
 ✅ Standalone Angular components (no NgModule overhead)  
 ✅ ChangeDetectorRef for immediate UI updates  
@@ -375,41 +360,3 @@ rm TeamTaskManagerApi/teamtaskmanager.db
 ✅ Efficient data filtering on client-side  
 ✅ SQLite in-memory caching with EF Core  
 ✅ JWT token caching in localStorage
-
----
-
-## 📝 License
-
-This is an educational project developed as part of the "Team Task Manager" assignment.
-
----
-
-## 👤 Author
-
-**Siddharth Sharma**  
-Full Stack Developer  
-Angular + .NET 8 Developer
-
----
-
-## 📞 Support
-
-For issues or questions:
-1. Check the Swagger API documentation at `http://localhost:5175/swagger`
-2. Review the browser console for frontend errors
-3. Check terminal output for backend logs
-
----
-
-**Last Updated:** May 6, 2026  
-**Status:** ✅ Production Ready
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
