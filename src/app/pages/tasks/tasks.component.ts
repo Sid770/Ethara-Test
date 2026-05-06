@@ -48,22 +48,31 @@ import { Project } from '../../models/project.model';
         <!-- Create Task Form -->
         <div *ngIf="showCreateForm && isAdmin" class="bg-white rounded-lg shadow p-6 mb-8">
           <h2 class="text-xl font-bold text-gray-800 mb-4">Create New Task</h2>
+          
+          <!-- Error Message in Form -->
+          <div *ngIf="error" class="p-3 bg-red-100 text-red-700 rounded-lg mb-4 text-sm">
+            ⚠️ {{ error }}
+          </div>
+
           <form [formGroup]="createForm" (ngSubmit)="createTask()" class="space-y-4">
             <div>
-              <label class="block text-gray-700 font-medium mb-2">Task Title</label>
+              <label class="block text-gray-700 font-medium mb-2">
+                Task Title <span class="text-red-500">*</span>
+              </label>
               <input
                 type="text"
                 formControlName="title"
                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Enter task title"
               />
+              <p *ngIf="createForm.get('title')?.invalid && createForm.get('title')?.touched" class="text-red-500 text-sm mt-1">Title is required</p>
             </div>
             <div>
               <label class="block text-gray-700 font-medium mb-2">Description</label>
               <textarea
                 formControlName="description"
                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Enter task description"
+                placeholder="Enter task description (optional)"
                 rows="3"
               ></textarea>
             </div>
@@ -76,16 +85,19 @@ import { Project } from '../../models/project.model';
               />
             </div>
             <div>
-              <label class="block text-gray-700 font-medium mb-2">Assign To</label>
+              <label class="block text-gray-700 font-medium mb-2">Assign To (User ID)</label>
               <input
                 type="text"
                 formControlName="assignedToId"
                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="User ID (optional)"
+                placeholder="Leave empty to assign later (optional)"
               />
+              <p class="text-gray-500 text-xs mt-1">Enter the user's ID or leave empty</p>
             </div>
             <div>
-              <label class="block text-gray-700 font-medium mb-2">Project</label>
+              <label class="block text-gray-700 font-medium mb-2">
+                Project <span class="text-red-500">*</span>
+              </label>
               <select
                 formControlName="projectId"
                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -93,14 +105,24 @@ import { Project } from '../../models/project.model';
                 <option value="">Select a project</option>
                 <option *ngFor="let project of projects" [value]="project.id">{{ project.name }}</option>
               </select>
+              <p *ngIf="createForm.get('projectId')?.invalid && createForm.get('projectId')?.touched" class="text-red-500 text-sm mt-1">Project is required</p>
             </div>
-            <button
-              type="submit"
-              [disabled]="loading"
-              class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg disabled:opacity-50"
-            >
-              {{ loading ? 'Creating...' : 'Create Task' }}
-            </button>
+            <div class="flex gap-2">
+              <button
+                type="submit"
+                [disabled]="loading || createForm.invalid"
+                class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {{ loading ? 'Creating...' : 'Create Task' }}
+              </button>
+              <button
+                type="button"
+                (click)="toggleCreateForm()"
+                class="px-4 py-2 bg-gray-300 hover:bg-gray-400 text-gray-800 rounded-lg"
+              >
+                Cancel
+              </button>
+            </div>
           </form>
         </div>
 
@@ -299,24 +321,33 @@ export class TasksComponent implements OnInit {
   }
 
   createTask(): void {
-    if (this.createForm.invalid) return;
+    if (this.createForm.invalid) {
+      this.error = 'Please fill in all required fields (Title and Project)';
+      return;
+    }
     this.loading = true;
+    this.error = null;
     this.cdr.detectChanges();
     const formValue = this.createForm.value;
     const task = {
-      ...formValue,
-      assignedToId: formValue.assignedToId || undefined
+      title: formValue.title.trim(),
+      description: formValue.description?.trim() || undefined,
+      dueDate: formValue.dueDate || undefined,
+      assignedToId: formValue.assignedToId?.trim() || undefined,
+      projectId: formValue.projectId
     };
     this.taskService.createTask(task).subscribe({
       next: () => {
         this.createForm.reset();
         this.showCreateForm = false;
+        this.error = null;
         this.loading = false;
         this.cdr.detectChanges();
         this.loadTasks();
       },
       error: (err) => {
-        this.error = 'Failed to create task';
+        console.error('Task creation error:', err);
+        this.error = err?.message || 'Failed to create task. Make sure you are the project owner.';
         this.loading = false;
         this.cdr.detectChanges();
       }

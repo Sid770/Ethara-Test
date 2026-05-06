@@ -17,7 +17,7 @@ export class TaskService {
           observer.complete();
         })
         .catch(error => {
-          observer.error(error.response?.data || error.message);
+          observer.error({ message: error.response?.data?.message || error.message || 'Failed to load project tasks' });
         });
     });
   }
@@ -30,7 +30,7 @@ export class TaskService {
           observer.complete();
         })
         .catch(error => {
-          observer.error(error.response?.data || error.message);
+          observer.error({ message: error.response?.data?.message || error.message || 'Failed to load task' });
         });
     });
   }
@@ -43,7 +43,8 @@ export class TaskService {
           observer.complete();
         })
         .catch(error => {
-          observer.error(error.response?.data || error.message);
+          const errorMessage = error.response?.data?.message || error.response?.data || error.message || 'Failed to create task';
+          observer.error({ message: errorMessage });
         });
     });
   }
@@ -56,7 +57,7 @@ export class TaskService {
           observer.complete();
         })
         .catch(error => {
-          observer.error(error.response?.data || error.message);
+          observer.error({ message: error.response?.data?.message || error.message || 'Failed to update task status' });
         });
     });
   }
@@ -69,7 +70,7 @@ export class TaskService {
           observer.complete();
         })
         .catch(error => {
-          observer.error(error.response?.data || error.message);
+          observer.error({ message: error.response?.data?.message || error.message || 'Failed to load assigned tasks' });
         });
     });
   }
@@ -82,7 +83,7 @@ export class TaskService {
           observer.complete();
         })
         .catch(error => {
-          observer.error(error.response?.data || error.message);
+          observer.error({ message: error.response?.data?.message || error.message || 'Failed to load tasks' });
         });
     });
   }

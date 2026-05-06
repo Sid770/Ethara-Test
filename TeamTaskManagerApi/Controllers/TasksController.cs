@@ -69,7 +69,7 @@ public class TasksController : ControllerBase
         var result = await _taskService.CreateTaskAsync(adminId, dto);
 
         if (result == null)
-            return BadRequest("Failed to create task");
+            return BadRequest(new { message = "Failed to create task. You must be the project owner to create tasks in it." });
 
         return CreatedAtAction(nameof(GetTask), new { id = result.Id }, result);
     }
