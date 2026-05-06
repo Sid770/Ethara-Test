@@ -6,6 +6,8 @@ using TeamTaskManagerApi.Data;
 using TeamTaskManagerApi.Middleware;
 using TeamTaskManagerApi.Repositories;
 using TeamTaskManagerApi.Services;
+using Azure.Storage.Blobs;
+using Microsoft.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -93,6 +95,9 @@ builder.Services.AddScoped<IDashboardService, DashboardService>();
 // Add logging
 builder.Services.AddLogging();
 
+// Register Azure BlobServiceClient (reads connection string from configuration key "AzureStorageConnectionString")
+builder.Services.AddSingleton(sp => new BlobServiceClient(builder.Configuration["AzureStorageConnectionString"]));
+
 var app = builder.Build();
 
 // Create and migrate database
@@ -101,6 +106,24 @@ using (var scope = app.Services.CreateScope())
     var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
     db.Database.EnsureCreated();
     DatabaseSeeder.SeedDemoData(db);
+
+    // Create blob container if AzureStorageConnectionString is set
+    var config = scope.ServiceProvider.GetRequiredService<IConfiguration>();
+    var blobConn = config["AzureStorageConnectionString"];
+    if (!string.IsNullOrEmpty(blobConn))
+    {
+        try
+        {
+            var blobServiceClient = scope.ServiceProvider.GetRequiredService<BlobServiceClient>();
+            var containerClient = blobServiceClient.GetBlobContainerClient("my-container");
+            await containerClient.CreateIfNotExistsAsync();
+        }
+        catch (Exception ex)
+        {
+            var logger = scope.ServiceProvider.GetService<ILogger<Program>>();
+            logger?.LogError(ex, "Failed to create blob container 'my-container'");
+        }
+    }
 }
 
 // Configure the HTTP request pipeline

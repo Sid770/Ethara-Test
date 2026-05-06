@@ -144,3 +144,10 @@ B:\OneDrive - Amity University\Desktop\Ethara\Test-Ethara\Ethara-Test\TeamTaskMa
 B:\OneDrive - Amity University\Desktop\Ethara\Test-Ethara\Ethara-Test\TeamTaskManagerApi\obj\Debug\net8.0\TeamTaskManagerApi.pdb
 B:\OneDrive - Amity University\Desktop\Ethara\Test-Ethara\Ethara-Test\TeamTaskManagerApi\obj\Debug\net8.0\TeamTaskManagerApi.genruntimeconfig.cache
 B:\OneDrive - Amity University\Desktop\Ethara\Test-Ethara\Ethara-Test\TeamTaskManagerApi\obj\Debug\net8.0\ref\TeamTaskManagerApi.dll
+B:\OneDrive - Amity University\Desktop\Ethara\Test-Ethara\Ethara-Test\TeamTaskManagerApi\obj\Debug\net8.0\TeamTaskManagerApi.sourcelink.json
+B:\OneDrive - Amity University\Desktop\Ethara\Test-Ethara\Ethara-Test\TeamTaskManagerApi\bin\Debug\net8.0\Azure.Core.dll
+B:\OneDrive - Amity University\Desktop\Ethara\Test-Ethara\Ethara-Test\TeamTaskManagerApi\bin\Debug\net8.0\Azure.Storage.Blobs.dll
+B:\OneDrive - Amity University\Desktop\Ethara\Test-Ethara\Ethara-Test\TeamTaskManagerApi\bin\Debug\net8.0\Azure.Storage.Common.dll
+B:\OneDrive - Amity University\Desktop\Ethara\Test-Ethara\Ethara-Test\TeamTaskManagerApi\bin\Debug\net8.0\System.ClientModel.dll
+B:\OneDrive - Amity University\Desktop\Ethara\Test-Ethara\Ethara-Test\TeamTaskManagerApi\bin\Debug\net8.0\System.IO.Hashing.dll
+B:\OneDrive - Amity University\Desktop\Ethara\Test-Ethara\Ethara-Test\TeamTaskManagerApi\bin\Debug\net8.0\System.Memory.Data.dll
